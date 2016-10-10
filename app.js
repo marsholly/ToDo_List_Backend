@@ -25,6 +25,13 @@ app.post('/todos', (req, res) => {
   });
 });
 
+app.delete('/todos/complete', (req, res) => {
+  TodoList.removeCompleteTodo((err, todos) => {
+    if(err) return res.status(400).send(err);
+    res.send("done");
+  });
+});
+
 app.delete('/todos/:id', (req, res) => {
   let id = req.params.id;
   TodoList.removeTodo(id, err => {
@@ -41,7 +48,6 @@ app.put('/todos/:id', (req, res) => {
   });
 });
 
-// app.delete('/todos/complete', )
 
 
 //

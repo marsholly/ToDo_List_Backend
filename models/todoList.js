@@ -53,3 +53,12 @@ exports.updateTodo = function(id, newTodo, cb) {
     cb(null, newTodo);
   })
 }
+
+exports.removeCompleteTodo = function(cb) {
+  exports.getAllTodoLists((err, todos) => {
+    if(err) return cb(err);
+    let newTodoList = todos.filter(todo => todo.isComplete !== true );
+    console.log('newTodoList:', newTodoList);
+    exports.write(newTodoList, cb);
+  })
+}
