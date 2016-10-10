@@ -4,6 +4,7 @@ const todoListPath = path.join(__dirname, '../data/todoList.json');
 const uuid = require('uuid');
 
 exports.getAllTodoLists = function(cb) {
+  console.log('there:')
   fs.readFile(todoListPath, (err, buffer) => {
     if (err) return cb(err);
     let data;
@@ -58,7 +59,34 @@ exports.removeCompleteTodo = function(cb) {
   exports.getAllTodoLists((err, todos) => {
     if(err) return cb(err);
     let newTodoList = todos.filter(todo => todo.isComplete !== true );
-    console.log('newTodoList:', newTodoList);
     exports.write(newTodoList, cb);
+  })
+}
+
+exports.getAllCompleteTodo = function(cb) {
+  fs.readFile(todoListPath, (err, buffer) => {
+    if (err) return cb(err);
+    let todos;
+    try {
+      todos = JSON.parse(buffer);
+    } catch(e) {
+      todos = [];
+    }
+    let newTodoList = todos.filter(todo => todo.isComplete === true );
+    cb(null, newTodoList);
+  })
+}
+
+exports.getAllUncompleteTodo = function(cb) {
+  fs.readFile(todoListPath, (err, buffer) => {
+    if (err) return cb(err);
+    let todos;
+    try {
+      todos = JSON.parse(buffer);
+    } catch(e) {
+      todos = [];
+    }
+    let newTodoList = todos.filter(todo => todo.isComplete === false );
+    cb(null, newTodoList);
   })
 }
