@@ -4,7 +4,6 @@ const todoListPath = path.join(__dirname, '../data/todoList.json');
 const uuid = require('uuid');
 
 exports.getAllTodoLists = function(cb) {
-  console.log('there:')
   fs.readFile(todoListPath, (err, buffer) => {
     if (err) return cb(err);
     let data;

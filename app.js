@@ -12,10 +12,6 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-
-
-
-
 app.get('/todos', (req, res) => {
   let { complete } = req.query
   if ( complete === 'true') {
