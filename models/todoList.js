@@ -30,3 +30,11 @@ exports.createNewTodo = function(newTodo, cb) {
     exports.write(todos, cb);
   });
 }
+
+exports.removeTodo = function(id, cb) {
+  exports.getAllTodoLists((err, todos) => {
+    if(err) return cb(err);
+    let newTodoList = todos.filter(todo => todo.id !== id);
+    exports.write(newTodoList, cb);
+  })
+}

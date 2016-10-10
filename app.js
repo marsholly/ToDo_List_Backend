@@ -22,18 +22,18 @@ app.post('/todos', (req, res) => {
   TodoList.createNewTodo(req.body, err => {
     if(err) return res.status(400).send(err);
     res.send('success')
-  })
-})
+  });
+});
 
-//
-// // create a question
-// app.post('/question', (req, res) => {
-//   FlashCard.createQuestion(req.body, err => {
-//     if(err) return res.status(400).send(err);
-//     res.send('success');
-//   });
-// });
-//
+app.delete('/todos/:id', (req, res) => {
+  let id = req.params.id;
+  TodoList.removeTodo(id, err => {
+    if(err) return res.status(400).send(err);
+    res.send("done");
+  });
+});
+
+
 // // delete a question
 // app.delete('/question/:id',(req, res) => {
 //   let _id = req.params.id;
