@@ -38,3 +38,18 @@ exports.removeTodo = function(id, cb) {
     exports.write(newTodoList, cb);
   })
 }
+
+exports.updateTodo = function(id, newTodo, cb) {
+  exports.getAllTodoLists((err, todos) => {
+    if(err) return cb(err);
+    let index = todos.findIndex(todo => todo.id === id);
+    if (index === -1) {
+      return cb({error: "Todo not found."});
+    }
+    newTodo.id = id;
+    newTodo.isComplete = true;
+    todos[index] = newTodo;
+    exports.write(todos, cb);
+    cb(null, newTodo);
+  })
+}

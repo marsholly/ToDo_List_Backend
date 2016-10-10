@@ -33,24 +33,17 @@ app.delete('/todos/:id', (req, res) => {
   });
 });
 
+app.put('/todos/:id', (req, res) => {
+  let id = req. params.id;
+  TodoList.updateTodo(id, req.body, (err, todo) => {
+    if(err) return res.status(400).send(err);
+    res.send(todo);
+  });
+});
 
-// // delete a question
-// app.delete('/question/:id',(req, res) => {
-//   let _id = req.params.id;
-//   FlashCard.removeOneQuestion(_id, err => {
-//     if(err) return res.status(400).send(err);
-//     res.send('done');
-//   });
-// });
-//
-// // update a question
-// app.put('/question/:id', (req, res) => {
-//   let _id = req.params.id;
-//   FlashCard.updateOneQuestion(_id, req.body, (err, question) => {
-//     if(err) return res.status(400).send(err);
-//     res.send(question);
-//   });
-// })
+// app.delete('/todos/complete', )
+
+
 //
 // //  get a category question  /question/category
 // app.get('/question/:category',(req, res) => {
